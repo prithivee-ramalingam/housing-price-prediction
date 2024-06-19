@@ -1,2 +1,0 @@
-luminol==0.4
-ruptures==1.1.6

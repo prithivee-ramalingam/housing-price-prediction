@@ -1,0 +1,46 @@
+(base):~$ pip install invoke
+(base):~$ pip install pyyaml
+
+To check whether github is installed
+	(base):~/<proj-folder>$ inv -l
+
+(base)~/<proj-folder>$ inv debug.check-reqs
+
+(base):~/<proj-folder>$ inv dev.setup-env
+
+(base):~/<proj-folder>$ conda activate ta-lib-dev
+
+(ta-lib-dev):~/<proj-folder>$ pip install invoke
+
+(ta-lib-dev):~/<proj-folder>$ inv dev.setup-addon --tareg
+
+pip install janitor
+
+pip install sphinx sphinx_rtd_theme nbsphinx jupyter_sphinx
+
+##############################################################################################
+
+How to run the scripts
+
+For listing all the available jobs
+	python production/cli.py job list
+
+For performing data cleaning
+python production/cli.py job run -j data-cleaning
+
+For performing feature engineering
+python production/cli.py job run -j feat-engg
+
+For performing model training
+python production/cli.py job run -j model-gen
+
+For performing model evaluation
+python production/cli.py job run -j model-eval
+
+
+##############################################################################################
+
+For generating docs
+
+cd docs
+make html
