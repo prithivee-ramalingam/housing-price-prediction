@@ -37,6 +37,17 @@ python production/cli.py job run -j model-gen
 For performing model evaluation
 python production/cli.py job run -j model-eval
 
+##############################################################################################
+To run specific task
+
+inv -l
+inv test.complexity
+
+##############################################################################################
+
+To perform testing
+
+pytest tests/test_transformer.py
 
 ##############################################################################################
 
