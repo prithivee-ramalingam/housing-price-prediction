@@ -1,46 +1,50 @@
 jobs:
-  - name: data-cleaning
+  - name: data-collection
     stages:
-      - name: "clean-base-tables"
+      - name: "download-raw-data"
         tasks:
-          - name: "product"
-            params: {}
-          - name: "orders"
-            params: {}
+          - name: "downloading"
+            params:
+              housing_url: "https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.tgz"
+              housing_path: "data/raw"
 
-      - name: "clean-derivative-tables"
-        tasks:
-          - name: "sales"
-            params: {}
       - name: "train-test-split"
         tasks:
-          - name: "train-test"
-            params:
-              target: unit_price
-              test_size: 0.2
+          - name: "creating_train_test"
+            params: {}
 
-  - name: feat-engg
+  - name: feature-engineering-job
     stages:
-      - name: "feature-pipelines"
+      - name: "feature-engineering"
         tasks:
-          - name: "transform-features"
-            params:
-              outliers:
-                method: mean
-                drop: False
-              sampling_fraction: 0.1
+          - name: "perform-feature-engineering"
+            params: {}
 
-  - name: model-gen
+  - name: model-training-job
     stages:
       - name: "model-creation"
         tasks:
-          - name: "train-model"
+          - name: "model-training"
             params:
-              sampling_fraction: 0.1
+              param_grid:
+                - n_estimators: [3, 10, 30]
+                  max_features: [2, 4, 6, 8]
+                - bootstrap: [False]
+                  n_estimators: [3, 10]
+                  max_features: [2, 3, 4]
+              param_distribs:
+                n_estimators:
+                  randint:
+                    low: 1
+                    high: 200
+                max_features:
+                  randint:
+                    low: 1
+                    high: 8
 
-  - name: model-eval
+  - name: model-evaluation-job
     stages:
       - name: "model-predict"
         tasks:
-          - name: "score-model"
+          - name: "model-scoring"
             params: {}
